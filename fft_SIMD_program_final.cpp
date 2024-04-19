@@ -1,4 +1,4 @@
-// Fast Fourier Transform (FFT) using 2D Cooley-Tukey algorithm
+// Fast Fourier Transform (FFT) using 2D Cooley-Tukey algorithm GCC
 
 // Original:
 #define _USE_MATH_DEFINES
