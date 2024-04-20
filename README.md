@@ -1,7 +1,8 @@
-# 1. Explanation of the code (functionality of the program, program flow, and how you have used SIMD to accelerate)
-
+# 1. File explanation
 ## a. Functionality:
-The program is designed to perform a 2D FFT on a square matrix of complex numbers (represented as std::complex<double>). FFT is a widely used algorithm in digital signal processing for converting signals between time and frequency domains.
+The program is designed to perform a 2D FFT on a square matrix of complex numbers (represented as std::complex<double>). FFT is a widely used algorithm in digital signal processing for converting signals between time and frequency domains. 
+#### fft_original_program.cpp is the original code without optimization. 
+#### fft_SIMD_program_final.cpp is the SIMD-optimized code.
 
 ## b. Program Flow:
 ### Define the FFT function: 
@@ -13,7 +14,9 @@ The program first applies the FFT row-wise. It iterates through each row of the 
 ### 1D FFT on Columns: 
 Then, it extracts each column from the 2D array, performs FFT on these columns, and places the transformed column back into the original matrix. This two-step process effectively accomplishes the 2D FFT.
 
-## c. SIMD Acceleration Explained:
+
+# 2. Explanation of the SIMD code
+## SIMD Acceleration Explained:
 ### AVX2 Intrinsics: 
 The program uses AVX2 intrinsics to accelerate parts of the FFT computation by: 
 #### #include <immintrin.h> 
@@ -31,10 +34,10 @@ Performs complex multiplication of the "odd" elements with the twiddle factors, 
 ### Performance Gains: 
 By processing four double-precision elements in parallel, the SIMD-optimized sections of the code can achieve significant speedups, especially on large datasets (in this case N= 10000) where such parallelizable operations dominate the computation time.
 
-# 2. Estimated speed up with explanation
+# 3. Estimated speed up with explanation
 AVX2 instructions operate on 256-bit wide registers. For double-precision floating-point operations, each AVX2 register can hold four double-precision values. Therefore, in an ideal scenario where the computation is purely CPU-bound, using AVX2 could theoretically provide up to a 4x speedup for the operations that have been vectorized, compared to scalar operations. However, due to factors like memory bandwidth limitations and overhead, the effective speedup for the entire FFT computation (including non-vectorized parts) might be lower, potentially in the range of 1.5x to 3x, depending on the specific hardware and runtime conditions.
 
-# 3. Compilation steps and flags
+# 4. Compilation steps and flags
 Compile the C++ file named fft_SIMD_program_final.cpp into an executable named fft_SIMD_final.exe using gcc, then run the executable. 
 ### gcc Flag used: 
 #### g++ -O2 -mavx2 fft_SIMD_program_final.cpp -o fft_SIMD_final
