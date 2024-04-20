@@ -1,4 +1,6 @@
-// Fast Fourier Transform (FFT) using 2D Cooley-Tukey algorithm GCC
+// Fast Fourier Transform (FFT) using 2D Cooley-Tukey algorithm 
+// gcc Flag used:  g++ -O2 -mavx2 fft_SIMD_program_final.cpp -o fft_SIMD_final
+
 
 // Original:
 #define _USE_MATH_DEFINES
